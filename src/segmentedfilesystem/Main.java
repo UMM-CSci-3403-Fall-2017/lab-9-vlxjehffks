@@ -14,7 +14,12 @@ public class Main {
 
 	    byte buffer[] = new byte[1024];
 
-	    DatagramPacket buffer = new DtagramPakcet(buffer, buffer.length, address, port);
+	    DatagramPacket packet = new DtagramPakcet(packet, packet.length, address, port);
+	    socket.send(packet);
+
+
+
+
 
 
 
