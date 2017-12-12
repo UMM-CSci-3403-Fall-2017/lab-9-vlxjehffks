@@ -26,7 +26,7 @@ public class Main2{
 			System.out.println();
 
 			Thread.sleep(10000);
-		}
+		}}
 		catch (SocketTimeoutException ex) {
 			System.out.println("Timeout error: " + ex.getMesseage());
 			ex.printStackTrace();
@@ -38,10 +38,8 @@ public class Main2{
 		catch (InterruptedException ex){
 			ex.printStackTrace();
 		}
+	
 	}
-	}
-
-
 
 		
 
