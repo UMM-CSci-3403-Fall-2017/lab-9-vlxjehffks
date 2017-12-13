@@ -54,7 +54,7 @@ public class Processor {
 		BufferedReader reader = new BufferedReader(new FileReader(smileFile));
 		String aQuote;
 
-		while ((aQuote = reader.readLine() != null) {
+		while ((aQuote = reader.readLine()) != null) {
 			listQuotes.add(aQuote);
 		}
 		reader.close();
