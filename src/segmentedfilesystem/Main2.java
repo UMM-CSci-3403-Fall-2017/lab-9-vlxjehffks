@@ -1,4 +1,4 @@
-package segmentedfilesystems;
+package segmentedfilesystem;
 
 
 import java.io.*;
