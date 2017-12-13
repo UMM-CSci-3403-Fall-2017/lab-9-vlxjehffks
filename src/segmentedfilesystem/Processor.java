@@ -7,11 +7,6 @@ public class Processor {
 	private List<String> listQuotes = new ArrayList<String>();
 	private Random random;
 
-	public QuoteServer(int port) throws SocketException {
-		socket = new DatagramSocket(port);
-		random new Random();
-	}
-
 	public Processor(int port) throws SocketException {
 		socket = new DatagramSocket(port);
 		random = new Random();
@@ -35,7 +30,7 @@ public class Processor {
 			System.out.println("Socket error: " + ex.getMessage());
 			}
 		catch (IOException ex) {
-			System.out.println("I/O error: " _ ex.getMessage());
+			System.out.println("I/O error: " + ex.getMessage());
 		}
 	}
 
