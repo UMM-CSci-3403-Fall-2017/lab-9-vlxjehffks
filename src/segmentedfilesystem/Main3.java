@@ -34,7 +34,7 @@ public class Main3 {
 					ds.receive(dp);
 						str = new String(dp.getData()).trim();
 						nReadSize = dp.getLength();
-					fos.write(dp.getData(), 0 nReadSize);
+					fos.write(dp.getData(), 0, nReadSize);
 					totalReadBytes+=nReadSize;
 					System.out.println("In progress: " + totalReadBytes + "/" 
 							+ fileSize + "Byte(s) ("
