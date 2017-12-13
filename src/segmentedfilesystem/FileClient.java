@@ -1,6 +1,6 @@
 package segmentedfilesystem;
 
-import java.io.DataoutputStream;
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
