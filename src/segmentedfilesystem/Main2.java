@@ -1,7 +1,7 @@
 package segmentedfilesystems;
 
 
-import java.util.oi.*;
+import java.oi.*;
 import java.net.*;
 
 public class Main2{
