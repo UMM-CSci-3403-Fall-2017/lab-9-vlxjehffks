@@ -43,7 +43,7 @@ public class Main3 {
 						break;
 				}
 				System.out.println("File transfer completed");
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 				fos.close();
 				ds.close();
 			}
