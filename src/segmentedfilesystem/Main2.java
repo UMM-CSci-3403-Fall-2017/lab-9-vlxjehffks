@@ -8,7 +8,7 @@ public class Main2{
 	public static void main(String[] args){
 		int port = 6014;
 	try{
-		InetAddress = address = InetAddress.getByName("localhost");
+		InetAddress address = InetAddress.getByName("localhost");
 		DatagramSocket socket = new DatagramSocket();
 	
 		while (true) {
