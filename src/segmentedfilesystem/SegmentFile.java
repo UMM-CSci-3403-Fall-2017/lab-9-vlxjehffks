@@ -23,13 +23,13 @@ public class SegmentFile {
 	public void filePackets() throws IOException{
 		byte[][] packetArray = new byte[file.size()][];
 		for(int i = 0; i < packetArray.length; i++){
-			packetArray[i[ = file.get(i);
+			packetArray[i] = file.get(i);
 		}
 		Arrays.sort(packetArray, new Sorting());
 		FileOutputStream Fos = new FileOutputStream("./" + packitName);
 
-		for(int i = 0; i < packitArray.length; i++){
-			Fos.write(packitArray[i]. 4, fileArray[i].length - 4);
+		for(int i = 0; i < packetArray.length; i++){
+			Fos.write(packetArray[i], 4, packetArray[i].length - 4);
 		}
 		Fos.flush();
 		Fos.close();
