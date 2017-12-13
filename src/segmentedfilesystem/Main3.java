@@ -25,7 +25,7 @@ public class Main3 {
 
 			if (str.equals("small.txt")){
 				System.out.println(str);
-				dp = new DatagramPAcket(buffer, buffer.length);
+				dp = new DatagramPacket(buffer, buffer.length);
 				ds.receive(dp);
 				str = new String(dp.getData()).trim();
 				fileSize = Long.parseLong(str);
