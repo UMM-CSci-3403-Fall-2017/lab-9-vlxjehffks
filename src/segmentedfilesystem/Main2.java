@@ -28,11 +28,11 @@ public class Main2{
 			Thread.sleep(10000);
 		}}
 		catch (SocketTimeoutException ex) {
-			System.out.println("Timeout error: " + ex.getMesseage());
+			System.out.println("Timeout error: " + ex.getMessage());
 			ex.printStackTrace();
 		}
 		catch (IOException ex) {
-			System.out.println("Client error: " + ex.getMesseage());
+			System.out.println("Client error: " + ex.getMessage());
 			ex.printStackTrace();
 		}
 		catch (InterruptedException ex){
