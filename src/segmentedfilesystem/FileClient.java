@@ -23,7 +23,7 @@ public class FileClient {
 		byte[] buffer = new byte[1028];
 
 		while (fis.read(buffer) > 0) {
-			dos.write(buffer);
+			dos.write(byte[1028], b, int off, int len);
 		}
 
 		fis.close();
