@@ -13,8 +13,9 @@ public class Main {
     public static String fileName;
     public static byte[] packet;
     public static ArrayList<byte[]> allFiles;
+    public static int counter = 0;
     
-                                    
+    //set file name; using for header packet                               
     public static void setFileName(){
         String noname = "";
         for(int i = 2; i < header.length; i++){
@@ -25,7 +26,8 @@ public class Main {
             }
         fileName = noname;
         }
-
+    
+    //Compare to sort byte arrays
     public static class compareMachine implements Comparator<byte[]> {
             @Override
             public int compare(byte[] p1, byte[] p2) {
@@ -46,6 +48,7 @@ public class Main {
     public static int f2Packet = Integer.MAX_VALUE;
     public static int f3Packet = Integer.MAX_VALUE;
     
+    //complete checker for status of packets
     public static void completeChecker(ArrayList<byte[]> f1, ArrayList<byte[]> f2, ArrayList<byte[]> f3){
         if(f1.size() == f1Packet+2) {
                 f1Done = true;
@@ -57,16 +60,18 @@ public class Main {
                 f3Done = true;
                 }
             }
+    //add method;from three packets into one arrayList
     public static void addData(ArrayList<byte[]> f1, ArrayList<byte[]> f2, ArrayList<byte[]> f3, byte[] b) {
-        byte[] c1 = {};
-        byte[] c2 = {};
-        byte[] c3 = {};
+        byte[] c1 = null;
+        byte[] c2 = null;
+        byte[] c3 = null;
 
         if(f1.isEmpty() || c1[1] == b[1]){
             f1.add(b);
             if(b[0]%2 == 1){
                 if((b[0]%4)==3){
                     f1Packet = ((Math.abs(b[2]<<8))+((int) 3) & 0xff);
+                    setFileName();
                     }
                 }
             }
@@ -88,14 +93,49 @@ public class Main {
             }
         completeChecker(f1, f2, f3);
         }
+    
+    //writing method for sorted array of bytes
+     public static void writeFile(ArrayList<byte[]> arr, String fileName) throws IOException{
+       File file = new File(fileName);
+       FileOutputStream fos = new FileOutputStream(file);
+       byte[] byteh;
 
-     public static void writeFile() throws IOException{
-  
-     }
+       System.out.println(file);
  
+       for(int i = 0; i < arr.size(); i++){
+         byteh = arr.get(i);
 
-   public static void main(String[] args) throws IOException {
+	 System.out.println(byteh[i]);
+       System.out.println("im here" + i);
+       
+       //Arrays.sort(arr, new compareMachine());
+    
+       for(int x = 4; x < byteh.length ; x++){
         
+	       System.out.println("gets here");
+	       if((int) byteh[x] == 0){
+         
+	       System.out.println("adsfaf");
+	       	 for(int y=0;y< byteh.length;y++){
+             fos.write(byteh[y]);
+	     System.out.println("im here " + y );
+           }
+           counter = 0;
+
+         fos.write(byteh[x]);
+       }
+       else{
+         counter++;
+       }
+       
+       //fos.flush();
+       //fos.close();
+     }
+     }
+     }
+     //main method
+   public static void main(String[] args) throws IOException {
+     try{
         int port = 6014;
         byte[] emptyb = new byte[1];
         byte[] buffer = new byte[1028];
@@ -109,7 +149,7 @@ public class Main {
         InetAddress address = InetAddress.getByName("localhost");
         DatagramPacket dp = new DatagramPacket(emptyb, 0, address, port);
         ds.send(dp);
-        
+    
         while(true){
             DatagramPacket dpReceived = new DatagramPacket(buffer, buffer.length);
             ds.receive(dpReceived);
@@ -117,36 +157,28 @@ public class Main {
             receivedStructure = dpReceived.getData();
 
             addData(f1, f2, f3, receivedStructure);
+   
 
             if(!f1Done || !f2Done || !f3Done){
                 Collections.sort(f1, new compareMachine());
                 Collections.sort(f2, new compareMachine());
                 Collections.sort(f3, new compareMachine());
+                  
+                writeFile(f1,"file");
+                writeFile(f2,"file2");
+                writeFile(f3,"file3");
 
-                //writeFile(f1);
-                //writeFile(f2);
-                //writeFile(f3);
+                
 
                 break;
                 }
             }ds.close();
+            
+
+     }
+     catch(IOException e){
+       e.printStackTrace();
+     }
+            }
+   
         }
-    }
-
-public static void writeFile(ArrayList<byte[]> dataPackage) throws IOException{
-	int writing;
-	Collections.sort(dataPackage, new compareMachine());
-	byte[] byteHeader = dataPackage.get(0);
-
-	for(int i = 0; i < dataPackage.size(); i++){
-		byteHeader = dataPackage.get(i);
-		if(byteHeader[0]%2 == 0){
-			dataPackage.remove(i);
-			break;
-		}
-	}
-	String Filename = "";
-	for(int i = 2; i < byteHeader.length; i++){
-		writing = byteHeader[i];
-		if(writing != 0){
-			Filename
