@@ -143,6 +143,7 @@ public class Main {
        //fos.close();
      }
      }
+     fos.close();
      }
      //main method
    public static void main(String[] args) throws IOException {
