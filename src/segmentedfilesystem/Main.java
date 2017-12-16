@@ -62,9 +62,9 @@ public class Main {
             }
     //add method;from three packets into one arrayList
     public static void addData(ArrayList<byte[]> f1, ArrayList<byte[]> f2, ArrayList<byte[]> f3, byte[] b) {
-        byte[] c1 = null;
-        byte[] c2 = null;
-        byte[] c3 = null;
+        byte[] c1 = f1.get(0);
+        byte[] c2 = f2.get(0);
+        byte[] c3 = f3.get(0);
 
         if(f1.isEmpty() || c1[1] == b[1]){
             f1.add(b);
@@ -149,8 +149,8 @@ public class Main {
    public static void main(String[] args) throws IOException {
      try{
         int port = 6014;
-        byte[] emptyb = new byte[1];
-        byte[] buffer = new byte[1028];
+        byte[] emptyb = new byte[256];
+        byte[] buffer = new byte[8004];
 
 
         ArrayList<byte[]> f1 = new ArrayList<byte[]>();
@@ -171,7 +171,7 @@ public class Main {
             addData(f1, f2, f3, receivedStructure);
    
 
-            if(!f1Done || !f2Done || !f3Done){
+            if(f1Done || f2Done || f3Done){
                 Collections.sort(f1, new compareMachine());
                 Collections.sort(f2, new compareMachine());
                 Collections.sort(f3, new compareMachine());
