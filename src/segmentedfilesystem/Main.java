@@ -9,7 +9,7 @@ public class Main {
     private static boolean f1Done = false;
     private static boolean f2Done = false;
     private static boolean f3Done = false;
-    public static byte[] header;
+    public static byte[] byteh;
     public static String fileName;
     public static byte[] packet;
     public static ArrayList<byte[]> allFiles;
@@ -18,11 +18,11 @@ public class Main {
     //set file name; using for header packet                               
     public static void setFileName(){
         String noname = "";
-        for(int i = 2; i < header.length; i++){
-            if(header[i] == 0){
+        for(int i = 2; i < byteh.length; i++){
+            if(byteh[i] == 0){
                 break;
                 }
-            noname = noname + (char) header[i];
+            noname = noname + (char) byteh[i];
             }
         fileName = noname;
         }
@@ -71,7 +71,6 @@ public class Main {
             if(b[0]%2 == 1){
                 if((b[0]%4)==3){
                     f1Packet = ((Math.abs(b[2]<<8))+((int) 3) & 0xff);
-                    setFileName();
                     }
                 }
             }
@@ -96,7 +95,7 @@ public class Main {
     
     //writing method for sorted array of bytes
      public static void writeFile(ArrayList<byte[]> arr) throws IOException{
-     	byte[] byteh = arr.get(0);
+     	 byteh = arr.get(0);
 
 	for(int i = 0; i < arr.size(); i++){
 		byteh = arr.get(i);
