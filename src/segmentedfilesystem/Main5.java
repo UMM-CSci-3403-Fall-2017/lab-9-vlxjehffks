@@ -15,7 +15,7 @@ public class Main5 {
     public static ArrayList<byte[]> allFiles;
     public static int counter = 0;
     
-                                    
+    //set file name; using for header packet                               
     public static void setFileName(){
         String noname = "";
         for(int i = 2; i < header.length; i++){
@@ -26,7 +26,8 @@ public class Main5 {
             }
         fileName = noname;
         }
-
+    
+    //Compare to sort byte arrays
     public static class compareMachine implements Comparator<byte[]> {
             @Override
             public int compare(byte[] p1, byte[] p2) {
@@ -47,6 +48,7 @@ public class Main5 {
     public static int f2Packet = Integer.MAX_VALUE;
     public static int f3Packet = Integer.MAX_VALUE;
     
+    //complete checker for status of packets
     public static void completeChecker(ArrayList<byte[]> f1, ArrayList<byte[]> f2, ArrayList<byte[]> f3){
         if(f1.size() == f1Packet+2) {
                 f1Done = true;
@@ -58,6 +60,7 @@ public class Main5 {
                 f3Done = true;
                 }
             }
+    //add method;from three packets into one arrayList
     public static void addData(ArrayList<byte[]> f1, ArrayList<byte[]> f2, ArrayList<byte[]> f3, byte[] b) {
         byte[] c1 = null;
         byte[] c2 = null;
@@ -90,24 +93,35 @@ public class Main5 {
             }
         completeChecker(f1, f2, f3);
         }
-
-     public static void writeFile(ArrayList<byte[]> arr) throws IOException{
+    
+    //writing method for sorted array of bytes
+     public static void writeFile(ArrayList<byte[]> arr, String fileName) throws IOException{
        File file = new File(fileName);
        FileOutputStream fos = new FileOutputStream(file);
        byte[] byteh;
+
+       System.out.println(file);
  
        for(int i = 0; i < arr.size(); i++){
          byteh = arr.get(i);
-       
+
+	 System.out.println(byteh[i]);
+       System.out.println("im here" + i);
        
        //Arrays.sort(arr, new compareMachine());
     
        for(int x = 4; x < byteh.length ; x++){
-         if((int) byteh[x] != 0){
-           for(int y=0;y<counter;y++){
-             fos.write((byte) 0);
+        
+	       System.out.println("gets here");
+	       if((int) byteh[x] == 0){
+         
+	       System.out.println("adsfaf");
+	       	 for(int y=0;y< byteh.length;y++){
+             fos.write(byteh[y]);
+	     System.out.println("im here " + y );
            }
            counter = 0;
+
          fos.write(byteh[x]);
        }
        else{
@@ -119,7 +133,7 @@ public class Main5 {
      }
      }
      }
-     
+     //main method
    public static void main(String[] args) throws IOException {
      try{
         int port = 6014;
@@ -139,20 +153,20 @@ public class Main5 {
         while(true){
             DatagramPacket dpReceived = new DatagramPacket(buffer, buffer.length);
             ds.receive(dpReceived);
-            byte[] receivedStructure = new byte[32768];
-            receivedStructure = dpReceived.getData();
+           // byte[] receivedStructure = new byte[32768];
+            byte[] receivedStructure = Arrays.copyOf(dpReceived.getData());
 
             addData(f1, f2, f3, receivedStructure);
    
 
-            if(!f1Done || !f2Done || !f3Done){
+            if(f1Done && f2Done && f3Done){
                 Collections.sort(f1, new compareMachine());
                 Collections.sort(f2, new compareMachine());
                 Collections.sort(f3, new compareMachine());
                   
-                writeFile(f1);
-                writeFile(f2);
-                writeFile(f3);
+                writeFile(f1,"file");
+                writeFile(f2,"file2");
+                writeFile(f3,"file3");
 
                 
 
