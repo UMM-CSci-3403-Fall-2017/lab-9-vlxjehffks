@@ -125,7 +125,7 @@ public class Main {
        for(int x = 4; x < byteh.length ; x++){
         
 	       System.out.println("gets here");
-	       if((int) byteh[x] !== 0){
+	       if((int) byteh[x] != 0){
          
 	       System.out.println("adsfaf");
 	       	 for(int y=0;y<counter;y++){
