@@ -5,26 +5,7 @@ import java.net.*;
 import java.util.*;
 
 public class Mainp {
-	public static void main(String[] args) throws IOException {
-		int port = 6014;
-		byte[] empy = new byte[0];
-		byte[] buffer = new byte[1028];
-		InetAddress ia = InetAddress.getByName("heartofgold.morris.umn.edu");
-		DatagramPacket dp = new DatagramPacket(empty, empty.length, ia, port);
-		DatagramSocket ds = new DatagramSocket(port);
-		ds.send(dp);
-
-		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-		ds.receive(packet);
-		catch(IOException e){
-			e.printStackTrace();
-		}
-	}
-
-
-
-	//	System.out.println(test(3,4));
-	//	System.out.println(test(4,3));
+	public static void main(String[] args){
 		try{
 			InetAddress ia = InetAddress.getByName("heartofgold.morris.umn.edu");
 			int port = 6014;
@@ -42,12 +23,12 @@ public class Mainp {
 		}
 	}
 	
-	//private boolean isHeader(DatagramPacket dp){
-	//	boolean header;
-	//	status = dp.getStatus();
-	//	return status;
-	//}
-	//make getStatus to 
+	private boolean isHeader(DatagramPacket dp){
+		boolean header;
+		status = dp.getStatus();
+		return status;
+	}
+	/ /make getStatus to 
 	private static byte getStatus(DatagramPacket dpReceived){
 		byte[] status;
 		status = dpReceived.getData();
@@ -60,6 +41,22 @@ public class Mainp {
 		byte[] fileID;
 		fileID = dpReceived.setFileID();
 		return fileID[0];
+	}
+	private static byte  setFileName(DatagramPacket dpReceived ){
+		byte[] fileName;
+		fileName = dpReceived.setFileName();
+		return fileName[0];
+	}
+	private static byte getDataObject(DatagramPakcet dpreceived){
+		byte[] dataObject;
+		dataObject = dpReceived.getDataObject();
+		return dataObject[0];
+	}
+
+	private static void writingFiles(ArrayList<byte[]> ){
+
+	
+	}
 
 	private static boolean test(int a, int b){
 		return (a%2 == 0);
@@ -71,6 +68,3 @@ public class Mainp {
 		//}
 	}
 }
-
-
-
