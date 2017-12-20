@@ -8,6 +8,10 @@ public class Mainp {
 	public static void main(String[] args) throws IOException{
 		String fileName = "";
 		try{
+			ArrayList<byte[]> Header = new ArrayList<byte[]>();
+			ArrayList<byte[]> footer = new ArrayList<byte[]>();
+			ArrayList<byte[]> dataObject = new ArrayList<byte[]>();
+
 			InetAddress ia = InetAddress.getByName("heartofgold.morris.umn.edu");
 			int port = 6014;
 			byte[] buffer = new byte[1028];
@@ -24,9 +28,6 @@ public class Mainp {
 		}
 	}
 
-	ArrayList<byte[]> Header = new ArrayList<byte[]>();
-	ArrayList<byte[]> footer = new ArrayList<byte[]>();
-	ArrayList<byte[]> dataObject = new ArrayList<byte[]>();
 	writingFile(Header);
 	writingFile(footer);
 	writingFile(dataObject);
@@ -64,24 +65,53 @@ public class Mainp {
 		}
 	}
 
+	private static int arraysize(ArrayList<byte[]> sizes, byfeSetFileID) {
+		int 
+
+
 	private static void writingFiles(ArrayList<byte[]> arr, String FileName) throws IOException {
 		FileOutputStream fos = new FileOutputStream(fileName);
 		byte[] fileObject;
 		for(int i = 0; i < arr.size(); i++){
+			fileObject = arr.get(i);
 			for(int x = 4; x < byteh.length ; x++){
-				fos.write(fileObject(i)[x])'
+				if((int) fileObject[x] == 0){
+					for(int y = 0; y < fileObject.length; y++){
+				fos.write(fileObject(i)[x]);
 			}
 		}
 		fos.flush();
 		fos.close();
 	}
 
-	private static class sorting implements Comparator<byte []> {
-		private int compare(byte[] c1, byte[] c2){
-			int fileCompare = 
-		
-	private static boolean test(int a, int b){
-		return (a%2 == 0);
+
+	
+	
+	
+	
+		//Compare to sort byte arrays
+    public static class compareMachine implements Comparator<byte[]> {
+            @Override
+            public int compare(byte[] p1, byte[] p2) {
+                int x = ((p1[2] & 0xff) << 8) | (p1[3] & 0xff);
+                int y = ((p2[2] & 0xff) << 8) | (p2[3] & 0xff);
+                int result = 0;
+                if(x < y) {
+                    result = -1;
+                    }
+                else if(x > y) {
+                    result = 1;
+                    }
+                return result;
+                }
+            }
+
+    public static int f1Packet = Integer.MAX_VALUE;
+    public static int f2Packet = Integer.MAX_VALUE;
+    public static int f3Packet = Integer.MAX_VALUE;
+
+	//private static boolean test(int a, int b){
+		//return (a%2 == 0);
 		//return (a<b);
 		//if(a < b){
 		//	return true;
@@ -90,3 +120,4 @@ public class Mainp {
 		//}
 	}
 }
+
